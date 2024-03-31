@@ -1,23 +1,31 @@
-window.onload = () => {
-    main()
-}
-function main() {
-    var btn = document.getElementById("btn");
-    var body = document.getElementById("root");
-    var input = document.getElementById("hex");
-    btn.addEventListener("click", function () {
-        var bgColor = hexColorGenerator();
-        console.log(bgColor)
-        input.value = bgColor;
-        body.style.backgroundColor = bgColor;
+document.addEventListener('DOMContentLoaded', () => {
+  main();
+});
 
-    })
+function main() {
+  const btn = document.querySelector('#btn');
+  const body = document.querySelector('#root');
+  const input = document.querySelector('#hex');
+
+  btn.addEventListener('click', () => {
+    const bgColor = hexColorGenerator();
+    updateBackgroundColor(bgColor);
+  });
+
+  function updateBackgroundColor(color) {
+    input.value = color;
+    body.style.backgroundColor = color;
+  }
 }
 
 function hexColorGenerator() {
-    var red = Math.floor(Math.random() * 255)
-    var green = Math.floor(Math.random() * 255)
-    var blue = Math.floor(Math.random() * 255)
+  const red = Math.floor(Math.random() * 256);
+  const green = Math.floor(Math.random() * 256);
+  const blue = Math.floor(Math.random() * 256);
 
-    return `#${red.toString(16)}${green.toString(16)}${blue.toString(16)}`;
+  return `#${padZero(red)}${padZero(green)}${padZero(blue)}`;
+}
+
+function padZero(number) {
+  return number.toString(16).padStart(2, '0');
 }
